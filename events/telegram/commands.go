@@ -27,11 +27,6 @@ func (p *Processor) doCmd(text string, chatID int, username string) error {
 		return p.savePage(chatID, text, username)
 	}
 
-	if strings.HasPrefix(text, "/yt ") {
-		videoURL := strings.TrimSpace(strings.TrimPrefix(text, "/yt"))
-		return p.DownloadAndSaveVideo(videoURL, chatID)
-	}
-
 	switch text {
 	case RndCmd:
 		return p.SendRandom(chatID, username)
