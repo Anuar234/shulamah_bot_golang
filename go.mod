@@ -2,13 +2,13 @@ module shulamah_bot_golang
 
 go 1.23.5
 
+require github.com/kkdai/youtube/v2 v2.10.4
+
 require (
 	github.com/bitly/go-simplejson v0.5.1 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/dop251/goja v0.0.0-20250309171923-bcd7cc6bf64c // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/google/pprof v0.0.0-20250501235452-c0086092b71a // indirect
-	github.com/kkdai/youtube/v2 v2.10.4 // indirect
 	golang.org/x/text v0.25.0 // indirect
-	gopkg.in/telebot.v3 v3.3.8 // indirect
 )
