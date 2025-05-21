@@ -22,7 +22,7 @@ func main() {
 
 	eventsProcessor := telegram.New(
 		tgClient.New(tgBotHost, mustToken()),
-		files.New(storagePath),
+		files.New(storagePath), downloadDir,
 	)
 	log.Print("service started")
 

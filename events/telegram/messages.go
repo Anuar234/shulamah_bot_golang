@@ -14,4 +14,5 @@ const (
 	msgNoSavedPages  = "You have no saved pages"
 	msgSaved         = "Saved!"
 	msgALreadyExists = "Ypu have already saved this page in the list"
+	DownloadDir      = "downloads"
 )

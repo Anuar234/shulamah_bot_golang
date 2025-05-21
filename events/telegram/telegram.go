@@ -12,6 +12,7 @@ type Processor struct {
 	tg      *telegram.Client
 	offset  int
 	storage storage.Storage
+	downloadPath string
 }
 
 type Meta struct {
@@ -24,10 +25,11 @@ var (
 	ErrUnkownMetaType = errors.New("unkwonw meta type")
 )
 
-func New(client *telegram.Client, storage storage.Storage) *Processor {
+func New(client *telegram.Client, storage storage.Storage, downloadPath string) *Processor {
 	return &Processor{
 		tg:      client,
 		storage: storage,
+		downloadPath: downloadPath,
 	}
 }
 func (p *Processor) Fetch(limit int) ([]events.Event, error) {
