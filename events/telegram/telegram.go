@@ -112,3 +112,10 @@ func fetchType(upd telegram.Update) events.Type {
 	return events.Message
 }
 
+// Add to your events/telegram/telegram.go file
+
+// Add to your command constants
+const (
+	// Your existing commands...
+	CmdYouTubeDownload = "/ytdl"
+)
