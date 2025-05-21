@@ -4,9 +4,12 @@ import (
 	"errors"
 	"log"
 	"net/url"
+	"os"
 	"shulamah_bot_golang/lib/e"
 	"shulamah_bot_golang/storage"
 	"strings"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 
@@ -34,6 +37,9 @@ func (p *Processor) doCmd(text string, chatID int, username string) error {
 		return p.SendHelp(chatID)
 	case StartCmd:
 		return p.SendHello(chatID)
+	case "download":
+    	return handleDownloadCommand(bot, message)
+
 	default:
 		return p.tg.SendMessage(chatID, msgUnkownCommand)
 	}
@@ -103,4 +109,25 @@ func isAddCmd(text string) bool{
 func isURL(text string) bool {
 	u, err:= url.Parse(text)
 	return err == nil && u.Host != ""
+}
+
+func HandleDownloadCommand(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+    url := message.CommandArguments()
+    if url == "" {
+        bot.Send(tgbotapi.NewMessage(message.Chat.ID, "Please provide a YouTube link."))
+        return
+    }
+
+    bot.Send(tgbotapi.NewMessage(message.Chat.ID, "Downloading..."))
+
+    path, err := e.DownloadYouTubeVideo(url)
+    if err != nil {
+        bot.Send(tgbotapi.NewMessage(message.Chat.ID, "Error: "+err.Error()))
+        return
+    }
+    defer os.Remove(path)
+
+    video := tgbotapi.NewVideoUpload(message.Chat.ID, path)
+    video.Caption = "Here is your video!"
+    bot.Send(video)
 }
